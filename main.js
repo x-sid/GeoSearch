@@ -65,3 +65,5 @@ function weatherInfo(lat,long){
     document.querySelector("#visibility").innerHTML = `<span class="props"><strong>Humidity:</strong> ${humidity}</span>`
     document.querySelector("#windspeed").innerHTML = `<span class="props"><strong>Windspeed:</strong> ${windSpeed}</span>`;
     document.querySelector("#desc").innerHTML = `<span "props"><i>The current weather is ${summary}</i></span>`;
+  })
+}
