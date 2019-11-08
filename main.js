@@ -1,5 +1,9 @@
 // selects the address form and add a submit event which triggers an api call
 const addressForm = document.getElementById('addressForm');
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/weather
 addressForm.addEventListener('submit',(e)=>{
   e.preventDefault();
   let location = searchBox.value;
@@ -12,7 +16,10 @@ addressForm.addEventListener('submit',(e)=>{
   })
   .then((response)=>{
     let{lat,lon} = response.data[0];
+<<<<<<< HEAD
     displayMap(lat,lon);
+    weatherInfo(lat,lon)
+>>>>>>> feature/weather
   });
 })
 
@@ -38,4 +45,33 @@ function displayMap(lat,long){
   // Add the 'scale' control
   L.control.scale().addTo(map);
 
+<<<<<<< HEAD
 }
+=======
+}
+
+
+//function that grabs weather info from an api
+function weatherInfo(lat,long){
+  let proxy ="https://cors-anywhere.herokuapp.com/"
+  let api = `${proxy}https://api.darksky.net/forecast/e3968dcc1c744f252da0bd34d9ae19e9/${lat},${long}`;
+  axios.get(api,{
+    params:{crossDomain:true}
+  })
+
+  .then((res)=>{
+    //returned weather properties from the call to the api
+    let { temperature,summary,icon,humidity,windSpeed} = res.data.currently;
+    let timezone = res.data.timezone
+    setIcon(icon,document.querySelector("#icon"));
+    let celcius = (temperature-32) * 5/9;
+    let currentTemp= document.querySelector(".degrees")
+    currentTemp.innerHTML = `${temperature}F <p id="tempConvert">click to convert</p>`;
+    //displays the required properties to the appropriate HTML DOM
+    document.querySelector("#timezone").textContent = timezone;
+    document.querySelector("#visibility").innerHTML = `<span class="props"><strong>Humidity:</strong> ${humidity}</span>`
+    document.querySelector("#windspeed").innerHTML = `<span class="props"><strong>Windspeed:</strong> ${windSpeed}</span>`;
+    document.querySelector("#desc").innerHTML = `<span "props"><i>The current weather is ${summary}</i></span>`;
+  })
+}
+>>>>>>> feature/weather
