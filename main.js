@@ -12,7 +12,6 @@ addressForm.addEventListener('submit',(e)=>{
   })
   .then((response)=>{
     let{lat,lon} = response.data[0];
-    
     displayMap(lat,lon);
   });
 })
