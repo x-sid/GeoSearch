@@ -11,11 +11,9 @@ addressForm.addEventListener('submit',(e)=>{
     }
   })
   .then((response)=>{
-    let lat = response.data[0].lat;
-    let long = response.data[0].lon;
-    
-    displayMap(lat,long);
-    setTimeout(lat,long);
+    let{lat,lon} = response.data[0];
+    displayMap(lat,lon);
+    weatherInfo(lat,lon)
   });
 })
 
