@@ -14,7 +14,7 @@ addressForm.addEventListener('submit',(e)=>{
     let{lat,lon} = response.data[0];
     displayMap(lat,lon);
     weatherInfo(lat,lon)
-    setIcon(lat,long);
+    setIcon(lat,lon);
   });
 })
 
