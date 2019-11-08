@@ -1,5 +1,6 @@
 // selects the address form and add a submit event which triggers an api call
 const addressForm = document.getElementById('addressForm');
+
 addressForm.addEventListener('submit',(e)=>{
   e.preventDefault();
   let location = searchBox.value;
@@ -12,7 +13,6 @@ addressForm.addEventListener('submit',(e)=>{
   })
   .then((response)=>{
     let{lat,lon} = response.data[0];
-    displayMap(lat,lon);
     weatherInfo(lat,lon)
   });
 })
