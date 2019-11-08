@@ -1,7 +1,6 @@
 // selects the address form and add a submit event which triggers an api call
 const addressForm = document.getElementById('addressForm');
-<<<<<<< HEAD
->>>>>>> feature/weather
+
 addressForm.addEventListener('submit',(e)=>{
   e.preventDefault();
   let location = searchBox.value;
@@ -14,10 +13,8 @@ addressForm.addEventListener('submit',(e)=>{
   })
   .then((response)=>{
     let{lat,lon} = response.data[0];
-<<<<<<< HEAD
     displayMap(lat,lon);
     weatherInfo(lat,lon)
->>>>>>> feature/weather
   });
 })
 
@@ -42,8 +39,6 @@ function displayMap(lat,long){
 
   // Add the 'scale' control
   L.control.scale().addTo(map);
-
-<<<<<<< HEAD
 }
 
 //function that grabs weather info from an api
@@ -69,4 +64,3 @@ function weatherInfo(lat,long){
     document.querySelector("#desc").innerHTML = `<span "props"><i>The current weather is ${summary}</i></span>`;
   })
 }
->>>>>>> feature/weather
