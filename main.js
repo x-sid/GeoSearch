@@ -1,6 +1,5 @@
 // selects the address form and add a submit event which triggers an api call
 const addressForm = document.getElementById('addressForm');
-
 addressForm.addEventListener('submit',(e)=>{
   e.preventDefault();
   let location = searchBox.value;
@@ -15,6 +14,7 @@ addressForm.addEventListener('submit',(e)=>{
     let{lat,lon} = response.data[0];
     displayMap(lat,lon);
     weatherInfo(lat,lon)
+    setIcon(lat,long);
   });
 })
 
@@ -39,6 +39,7 @@ function displayMap(lat,long){
 
   // Add the 'scale' control
   L.control.scale().addTo(map);
+
 }
 
 //function that grabs weather info from an api
@@ -64,3 +65,13 @@ function weatherInfo(lat,long){
     document.querySelector("#desc").innerHTML = `<span "props"><i>The current weather is ${summary}</i></span>`;
   })
 }
+
+//functtion that sets the weather icon
+function setIcon(icon,iconId){
+  const skycons = new Skycons({color:"white"});
+  const currentIcon = icon.replace(/-/g,"_").toUpperCase();
+  skycons.play();
+  return skycons.set(iconId,Skycons[currentIcon]);
+
+}
+
