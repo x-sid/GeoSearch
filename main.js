@@ -1,8 +1,6 @@
 // selects the address form and add a submit event which triggers an api call
 const addressForm = document.getElementById('addressForm');
 <<<<<<< HEAD
-=======
-
 >>>>>>> feature/weather
 addressForm.addEventListener('submit',(e)=>{
   e.preventDefault();
@@ -47,9 +45,6 @@ function displayMap(lat,long){
 
 <<<<<<< HEAD
 }
-=======
-}
-
 
 //function that grabs weather info from an api
 function weatherInfo(lat,long){
