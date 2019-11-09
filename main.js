@@ -60,12 +60,12 @@ addressForm.addEventListener('submit',(e)=>{
     }
   })
   .then((response)=>{
-    console.log(response)
     let {lat,lon,} = response.data[0];
     
     displayMap(lat,lon);
     weatherInfo(lat,lon);
     setIcon(lat,lon);
+    postCode(lat,lon);
   });
 })
 
@@ -138,4 +138,14 @@ function displayMap(lat,lon){
   // Add the 'scale' control
   L.control.scale().addTo(map);
 
+}
+
+
+//it grabs the postcode code based on user search
+function postCode(lat,lon){
+  axios.get(`https://us1.locationiq.com/v1/reverse.php?key=3180628f7bc8ea&lat=${lat}&lon=${lon}&format=json`)
+  .then(res=>{
+    let postCode = res.data.address.postcode;
+    document.querySelector("#postcode").innerHTML= `<h4 class="props"><strong>Postcode:</strong> ${postCode}</h4>`
+  })
 }
