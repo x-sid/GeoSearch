@@ -60,17 +60,17 @@ addressForm.addEventListener('submit',(e)=>{
     }
   })
   .then((response)=>{
-    let {lat,lon,} = response.data[0].lat;
-    let postCode = response.data[0].address.postcode;
+    console.log(response)
+    let {lat,lon,} = response.data[0];
     
     displayMap(lat,lon);
-    setTimeout(weatherInfo(lat,lon,postCode),500);
+    weatherInfo(lat,lon);
     setIcon(lat,lon);
   });
 })
 
 //function that grabs weather info from an api
-function weatherInfo(lat,lon,postcode){
+function weatherInfo(lat,lon){
   let proxy ="https://cors-anywhere.herokuapp.com/"
   let api = `${proxy}https://api.darksky.net/forecast/e3968dcc1c744f252da0bd34d9ae19e9/${lat},${lon}`;
   axios.get(api,{
@@ -87,10 +87,11 @@ function weatherInfo(lat,lon,postcode){
     currentTemp.innerHTML = `${temperature}F <p id="tempConvert">click to convert</p>`;
     //displays the required properties to the appropriate HTML DOM
     document.querySelector("#timezone").textContent = timezone;
-    document.querySelector("#visibility").innerHTML = `<span class="props"><strong>Humidity:</strong> ${humidity}</span>`
-    document.querySelector("#windspeed").innerHTML = `<span class="props"><strong>Windspeed:</strong> ${windSpeed}
-     ${postcode}</span>`;
-    document.querySelector("#desc").innerHTML = `<span "props"><i>The current weather is ${summary}</i></span>`;
+    document.querySelector("#visibility").innerHTML = `<h4 class="props"><strong>Humidity:</strong> ${humidity}</h4>`
+    document.querySelector("#windspeed").innerHTML = `<h4 class="props">
+                                                        <strong>Windspeed:</strong> ${windSpeed}
+                                                      </h4>`;
+    document.querySelector("#desc").innerHTML = `<h4 class="props"><i>The current weather is ${summary}</i></h4>`;
 
     //converts temperature between Celcius and Fahrenheit
     currentTemp.addEventListener("click",()=>{

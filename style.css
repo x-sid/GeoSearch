@@ -113,17 +113,19 @@ img{
   cursor:pointer;
 }
 
-#visibility, #windspeed,#desc{
-  background: black;
-  width:30%;
+#visibility,#windspeed,#desc{
   margin-left: 35%;
-  padding:3px;
   font-family: sans-serif, Times, serif;
-  font-size:16px;
   margin-bottom: 10px;
   margin-top:10px;
+}
+.props{
+  width:40%;
+  background: black;
   color:white;
-
+  padding: 3px;
+  font-size: 14px;
+  border-radius:5px;
 }
 
 
