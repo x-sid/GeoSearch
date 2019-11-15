@@ -8,34 +8,32 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <link href="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/master/leaflet.css" rel="stylesheet" type="text/css"/>
  
-  <title>GeoSearch</title>
+  <title>Geo-Search</title>
 </head>
 <body>
   <header class="pageTop">
-    <h1>GeoSearch</h1>
+    <h1>Geo-Search</h1>
   </header>
   <section class="pageTop">
     <form action="" id= "addressForm">
-        <input type="text" id="searchBox" placeholder="Enter a place of interest...">
-        <button id="search"><img src="./images/search.png"/></button>
+      <input type="text" id="searchBox" placeholder="Enter a place of interest..." autocomplete="off">
+      <button id="search"><img src="./images/search.png"/></button>
     </form>
     <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:5500/index.html" id = "fb" target="_blank">
       <img src="./images/icon.png"/>
     </a>
   </section>
-  <div id="autoComplete">
-
-  </div>
+  <div id="autoComplete"></div>
   <section>
     <div id="timezone"></div>
     <div id="map"></div>
     <div id="temperature">
-      <canvas id="icon" width="250" height="250"></canvas>
+      <canvas id="icon"></canvas>
     </div>
     <div>
       <h4 class="degrees"></h4>
     </div>
-    <div>
+    <div class="weatherProps">
       <div id="desc"></div>
       <div id="visibility"></div>
       <div id ="windspeed"></div>
