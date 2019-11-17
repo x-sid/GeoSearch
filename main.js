@@ -36,6 +36,8 @@ searchBox.addEventListener("input", () => {
               `<div class="suggest"> ${place.address.name},${place.address.country}</div>`
           )
           .join("");
+      } else {
+        suggest = [];
       }
 
       autoComplete.innerHTML = suggest;
@@ -45,6 +47,9 @@ searchBox.addEventListener("input", () => {
           searchBox.value = e.target.innerHTML;
           autoComplete.innerHTML = "";
         });
+      });
+      document.querySelector("body").addEventListener("click", () => {
+        autoComplete.innerHTML = "";
       });
     });
 });
@@ -76,46 +81,52 @@ addressForm.addEventListener("submit", e => {
 function weatherInfo(lat, lon) {
   let proxy = "https://cors-anywhere.herokuapp.com/";
   let api = `${proxy}https://api.darksky.net/forecast/e3968dcc1c744f252da0bd34d9ae19e9/${lat},${lon}`;
-  axios
-    .get(api, {
-      params: { crossDomain: true }
-    })
+  try {
+    axios
+      .get(api, {
+        params: { crossDomain: true }
+      })
 
-    .then(res => {
-      //returned weather properties from the call to the api
-      let {
-        temperature,
-        summary,
-        icon,
-        humidity,
-        windSpeed
-      } = res.data.currently;
-      let timezone = res.data.timezone;
-      setIcon(icon, document.querySelector("#icon"));
-      let celcius = ((temperature - 32) * 5) / 9;
-      let currentTemp = document.querySelector(".degrees");
-      currentTemp.innerHTML = `${temperature}F <p id="tempConvert">click to convert</p>`;
-      //displays the required properties to the appropriate HTML DOM
-      document.querySelector("#timezone").textContent = `Timezone ${timezone}`;
-      document.querySelector(
-        "#visibility"
-      ).innerHTML = `<h4 class="props"><strong>Humidity:</strong> ${humidity}</h4>`;
-      document.querySelector(
-        "#windspeed"
-      ).innerHTML = `<h4 class="props"><strong>Windspeed:</strong> ${windSpeed}</h4>`;
-      document.querySelector(
-        "#desc"
-      ).innerHTML = `<h4 class="props"><i>The current weather is ${summary}</i></h4>`;
+      .then(res => {
+        //returned weather properties from the call to the api
+        let {
+          temperature,
+          summary,
+          icon,
+          humidity,
+          windSpeed
+        } = res.data.currently;
+        let timezone = res.data.timezone;
+        setIcon(icon, document.querySelector("#icon"));
+        let celcius = ((temperature - 32) * 5) / 9;
+        let currentTemp = document.querySelector(".degrees");
+        currentTemp.innerHTML = `${temperature}F <p id="tempConvert">click to convert</p>`;
+        //displays the required properties to the appropriate HTML DOM
+        document.querySelector(
+          "#timezone"
+        ).textContent = `Timezone ${timezone}`;
+        document.querySelector(
+          "#visibility"
+        ).innerHTML = `<h4 class="props"><strong>Humidity:</strong> ${humidity}</h4>`;
+        document.querySelector(
+          "#windspeed"
+        ).innerHTML = `<h4 class="props"><strong>Windspeed:</strong> ${windSpeed}</h4>`;
+        document.querySelector(
+          "#desc"
+        ).innerHTML = `<h4 class="props"><i>The current weather is ${summary}</i></h4>`;
 
-      //converts temperature between Celcius and Fahrenheit
-      currentTemp.addEventListener("click", () => {
-        if (currentTemp.innerHTML.indexOf("F") >= 0) {
-          currentTemp.textContent = `${Math.floor(celcius)}C`;
-        } else {
-          currentTemp.textContent = `${temperature}F`;
-        }
+        //converts temperature between Celcius and Fahrenheit
+        currentTemp.addEventListener("click", () => {
+          if (currentTemp.innerHTML.indexOf("F") >= 0) {
+            currentTemp.textContent = `${Math.floor(celcius)}C`;
+          } else {
+            currentTemp.textContent = `${temperature}F`;
+          }
+        });
       });
-    });
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 //functtion that sets the weather icon
